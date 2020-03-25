@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "844867495468",
+    "firebase_url": "https://senorita-98397.firebaseio.com",
+    "project_id": "senorita-98397",
+    "storage_bucket": "senorita-98397.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844867495468:android:14e04a43440498db545389",
+        "android_client_info": {
+          "package_name": "com.senoritasaudi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "844867495468-jqus5uot65r8059rl1p26sup38d3c65q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.senoritasaudi",
+            "certificate_hash": "f72457db7cc6f6ac7f3a5b9e60a8ed41622f6a5c"
+          }
+        },
+        {
+          "client_id": "844867495468-3g474omhtj0r16pvr8kqml1ifp3lbhjc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj-5XjA_gLEY_o7dUsRGrEYvI4U0MmXNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "844867495468-3g474omhtj0r16pvr8kqml1ifp3lbhjc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "844867495468-5blb1ncc6e0qt86j9rn23ihk90h2alj5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "senorita.com"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

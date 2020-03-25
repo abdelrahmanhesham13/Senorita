@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:background="@android:color/white"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".views.HomeFragmentWithoutViewModel">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="@string/departments"
+                android:id="@+id/departments"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="10dp"
+                app:fontFamily="@font/jf_flat"
+                android:textColor="@android:color/black"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="مزيد من الاقسام"
+                android:foreground="?attr/selectableItemBackground"
+                android:textColor="@color/colorPrimary"
+                app:fontFamily="@font/jf_flat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/departments_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                tools:listitem="@layout/list_department_item"
+                android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/departments"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:id="@+id/departments_progress"
+                android:layout_height="wrap_content"
+                android:theme="@style/ProgressStyle"
+                app:layout_constraintBottom_toBottomOf="@+id/departments_recycler"
+                app:layout_constraintEnd_toEndOf="@+id/departments_recycler"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/departments_recycler" />
+
+            <com.synnapps.carouselview.CarouselView
+                android:id="@+id/image_slider"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/departments_recycler"
+                app:strokeWidth="0dp"
+                app:radius="5dp"
+                app:fillColor="@color/colorPrimary"
+                app:pageColor="#FFFFFF"/>
+
+            <ProgressBar
+                android:id="@+id/slider_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/ProgressStyle"
+                app:layout_constraintBottom_toBottomOf="@+id/image_slider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/departments_recycler" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="@string/featured_offers"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_slider"
+                android:layout_margin="10dp"
+                app:fontFamily="@font/jf_flat"
+                android:textColor="@android:color/black"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/more_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="مزيد من العروض"
+                android:foreground="?attr/selectableItemBackground"
+                android:textColor="@color/colorPrimary"
+                app:fontFamily="@font/jf_flat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_slider" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/offers_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/list_offer_item"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/more_2" />
+
+            <ProgressBar
+                android:id="@+id/offers_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/ProgressStyle"
+                app:layout_constraintTop_toTopOf="@id/offers_recycler"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/offers_recycler" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

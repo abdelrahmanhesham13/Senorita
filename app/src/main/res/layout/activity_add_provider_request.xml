@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="clickHandler"
+            type="com.senoritasaudi.events.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.ContactUsActivity">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/progress_parent"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:theme="@style/ProgressStyle" />
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/imageView28"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/im_add_clinic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/add_provider_request"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/jf_flat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView28" />
+
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/provider_name"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            app:fontFamily="@font/jf_flat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <EditText
+            android:id="@+id/editText6"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:background="@drawable/bg_edit_text"
+            android:drawablePadding="10dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center_vertical|start"
+            android:hint="@string/provider_name"
+            android:layout_marginTop="10dp"
+            android:inputType="textPersonName"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_marginEnd="15dp"
+            android:textAlignment="viewStart"
+            android:textSize="14sp"
+            app:fontFamily="@font/jf_flat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView16"
+            app:layout_constraintTop_toBottomOf="@+id/textView16"
+            android:layout_marginRight="15dp" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/phone_number"
+            android:textSize="15sp"
+            app:fontFamily="@font/jf_flat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText6" />
+
+        <EditText
+            android:id="@+id/editText8"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:drawablePadding="10dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center_vertical|start"
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:paddingStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_edit_text"
+            android:paddingEnd="10dp"
+            android:textAlignment="viewStart"
+            android:textSize="14sp"
+            app:fontFamily="@font/jf_flat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/address_and_information_of_provider"
+            android:textSize="15sp"
+            app:fontFamily="@font/jf_flat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText8" />
+
+        <EditText
+            android:id="@+id/editText9"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:drawablePadding="10dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="start"
+            android:padding="10dp"
+            android:hint="@string/address_and_information_of_provider"
+            android:inputType="text"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_edit_text"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textAlignment="viewStart"
+            android:textSize="14sp"
+            app:fontFamily="@font/jf_flat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_button"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="@string/add_request"
+            android:onClick="@{v -> clickHandler.onClick(v)}"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="17sp"
+            android:layout_marginTop="10dp"
+            app:fontFamily="@font/jf_flat"
+            app:layout_constraintEnd_toEndOf="@+id/editText9"
+            app:layout_constraintStart_toStartOf="@+id/editText9"
+            app:layout_constraintTop_toBottomOf="@+id/editText9" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
