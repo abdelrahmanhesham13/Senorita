@@ -100,4 +100,5 @@
     <string name="leave_comment">اترك تعليق</string>
     <string name="rate">قيم</string>
     <string name="change_password">تغيير كلمة المرور</string>
+    <string name="one_filter">اختار تصنيف واحد علي الاقل</string>
 </resources>
