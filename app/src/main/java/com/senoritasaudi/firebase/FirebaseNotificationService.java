@@ -33,7 +33,7 @@ public class FirebaseNotificationService extends FirebaseMessagingService {
 
         mBuilder.setDefaults(NotificationCompat.DEFAULT_SOUND);
         mBuilder.setStyle(new NotificationCompat.BigTextStyle()
-                .bigText(notificationMessage.get("title")));
+                .bigText(notificationMessage.get("body")));
         mBuilder.setContentTitle(notificationMessage.get("title"));
         mBuilder.setContentText(notificationMessage.get("body"));
         mBuilder.setChannelId("0");
