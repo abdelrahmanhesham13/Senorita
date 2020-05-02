@@ -24,9 +24,11 @@ import com.bumptech.glide.Glide;
 import com.senoritasaudi.R;
 import com.senoritasaudi.databinding.ActivityReservationBinding;
 import com.senoritasaudi.events.OnClickListener;
+import com.senoritasaudi.models.FeedbackResponse;
 import com.senoritasaudi.models.OfferModel;
 import com.senoritasaudi.models.responseModels.OfferResponseModel;
 import com.senoritasaudi.models.responseModels.ReservationResponseModel;
+import com.senoritasaudi.storeutils.StoreManager;
 import com.senoritasaudi.viewmodels.ReservationViewModel;
 import com.senoritasaudi.viewmodels.factory.ViewModelFactory;
 import com.senoritasaudi.views.baseviews.BaseActivityWithViewModel;
@@ -46,24 +48,53 @@ public class ReservationActivity extends BaseActivityWithViewModel<ReservationVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(getString(R.string.reserve_now));
+        setTitle(getString(R.string.offer_number) + " : " + getIntent().getStringExtra("offerId"));
         getActivityBinding().setClickHandler(this);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        getActivityBinding().cardView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReservationActivity.this,DepartmentOffersActivity.class);
+                intent.putExtra("departmentId",offerModel.getCategoryId());
+                startActivity(intent);
+            }
+        });
+
+        getActivityBinding().cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReservationActivity.this,ClinicDetailsActivity.class).putExtra("clinicId",offerModel.getClinicId()));
+            }
+        });
+
 
         getActivityViewModel().getOffer().observe(this, new Observer<OfferResponseModel>() {
             @Override
             public void onChanged(OfferResponseModel offerResponseModel) {
                 getActivityBinding().progressParent.setVisibility(View.GONE);
                 offerModel = offerResponseModel.getOffers().get(0);
-                getActivityBinding().textView15.setText(offerModel.getClinicName());
-                getActivityBinding().textView16.setText("رقم العرض : " + offerModel.getId());
+                if (StoreManager.getAppLanguage(ReservationActivity.this).equals("ar")) {
+                    getActivityBinding().textView15.setText(offerModel.getClinicNameAr());
+                    getActivityBinding().textView16.setText(offerModel.getCategoryNameAr());
+                } else {
+                    getActivityBinding().textView15.setText(offerModel.getClinicName());
+                    getActivityBinding().textView16.setText(offerModel.getCategoryName());
+                }
+
+                getActivityBinding().offerBooked.setText(getString(R.string.offer_booked) + " : " + offerModel.getRequestCount() + " " + getString(R.string.time));
                 getActivityBinding().textView17.setText(offerModel.getPlaceName());
                 Glide.with(ReservationActivity.this)
                         .load(offerModel.getImage())
                         .placeholder(R.drawable.im_placeholder)
                         .error(R.drawable.im_placeholder)
                         .into(getActivityBinding().imageView29);
+                Glide.with(ReservationActivity.this)
+                        .load(offerModel.getCategoryImage())
+                        .placeholder(R.drawable.im_placeholder)
+                        .error(R.drawable.im_placeholder)
+                        .into(getActivityBinding().departmentImage);
             }
         });
     }
@@ -101,6 +132,40 @@ public class ReservationActivity extends BaseActivityWithViewModel<ReservationVi
             case R.id.next_button:
                 checkData();
                 break;
+            case R.id.check_promo_code:
+                checkPromoCode();
+                break;
+        }
+    }
+
+    private void checkPromoCode() {
+        String promoCode = getActivityBinding().editText3.getText().toString().trim();
+        if (promoCode.isEmpty()) {
+            getActivityBinding().editText3.setError(getString(R.string.enter_promo_code));
+            getActivityBinding().editText3.requestFocus();
+        } else {
+            getActivityBinding().progressParent.setVisibility(View.VISIBLE);
+            getActivityViewModel().checkPromoCode(offerModel.getId(),offerModel.getClinicId(),promoCode).observe(ReservationActivity.this, new Observer<FeedbackResponse>() {
+                @Override
+                public void onChanged(FeedbackResponse feedbackResponse) {
+                    getActivityBinding().progressParent.setVisibility(View.GONE);
+                    if (feedbackResponse != null && feedbackResponse.getStatus()) {
+                        if (StoreManager.getAppLanguage(ReservationActivity.this).equals("ar")) {
+                            Toast.makeText(ReservationActivity.this, feedbackResponse.getMessageAr(), Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(ReservationActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    } else if (feedbackResponse != null) {
+                        if (StoreManager.getAppLanguage(ReservationActivity.this).equals("ar")) {
+                            Toast.makeText(ReservationActivity.this, feedbackResponse.getMessageAr(), Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(ReservationActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Toast.makeText(ReservationActivity.this,getString(R.string.error), Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
         }
     }
 
@@ -156,7 +221,7 @@ public class ReservationActivity extends BaseActivityWithViewModel<ReservationVi
         d.setCancelable(false);
 
         Button save = d.findViewById(R.id.dismiss);
-        ((TextView)d.findViewById(R.id.text)).setText("سيتم الاتصال بك في اقرب وقت لتأكيد معاد الحجز\nرقم الحجز : " + reservationId);
+        ((TextView)d.findViewById(R.id.text)).setText(getString(R.string.confirm_reservation) + reservationId);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

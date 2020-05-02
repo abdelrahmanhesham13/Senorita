@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:background="@color/ef_white"
+        android:layout_height="match_parent"
+        tools:context=".views.ChangeLanguageActivity">
+
+        <ImageView
+            android:layout_marginTop="20dp"
+            android:layout_width="200dp"
+            android:src="@drawable/im_logo"
+            android:layout_height="100dp"/>
+
+        <ImageView
+            android:layout_width="200dp"
+            android:src="@drawable/im_change_language"
+            android:layout_height="150dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/jf_flat"
+            android:text="اختر اللغه / Choose Language"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/arabic_button"
+            android:layout_width="300dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:text="العربية"
+            android:background="@drawable/bg_change_language_button_activated"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/jf_flat"
+            android:layout_height="40dp"/>
+
+        <Button
+            android:id="@+id/english_button"
+            android:layout_width="300dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:text="English"
+            android:background="@drawable/bg_change_language_button"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:fontFamily="@font/jf_flat"
+            android:layout_height="40dp"/>
+
+    </LinearLayout>
+</layout>

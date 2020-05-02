@@ -39,10 +39,22 @@ public class MenuActivity extends BaseActivityWithViewModel<LoginViewModel, Acti
                         .error(R.drawable.im_placeholder)
                         .into(getActivityBinding().circleImageView);
             }
+            getActivityBinding().textView4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.putExtra("profile",true);
+                    startActivity(intent);
+                }
+            });
             getActivityBinding().textView4.setText(getActivityViewModel().getUser().getName());
+            getActivityBinding().vipMember.setText(getString(R.string.points) + " : " + getActivityViewModel().getUser().getPoints());
         } else {
             getActivityBinding().imageView26.setVisibility(View.GONE);
             getActivityBinding().logout.setVisibility(View.GONE);
+            getActivityBinding().vipMember.setVisibility(View.GONE);
             getActivityBinding().textView15.setVisibility(View.GONE);
             getActivityBinding().imageView27.setVisibility(View.GONE);
             getActivityBinding().textView4.setOnClickListener(new View.OnClickListener() {
@@ -67,13 +79,35 @@ public class MenuActivity extends BaseActivityWithViewModel<LoginViewModel, Acti
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (getActivityViewModel().containsUser()) {
+            getActivityBinding().vipMember.setText(getString(R.string.points) + " : " + getActivityViewModel().getUser().getPoints());
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.notifications:
                 NavigationManager.startActivity(MenuActivity.this, NotificationsActivity.class);
                 break;
             case R.id.back_button:
+            case R.id.home:
                 finish();
+                break;
+            case R.id.exchange_points:
+                if (getActivityViewModel().containsUser()) {
+                    NavigationManager.startActivity(MenuActivity.this, PointsActivity.class);
+                } else {
+                    Toast.makeText(this, getString(R.string.please_login), Toast.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.search:
+                NavigationManager.startActivity(MenuActivity.this,SearchActivity.class);
+                break;
+            case R.id.change_language:
+                NavigationManager.startActivity(MenuActivity.this,ChangeLanguageActivity.class);
                 break;
             case R.id.terms_and_conditions:
                 startActivity(new Intent(MenuActivity.this, InformationActivity.class)

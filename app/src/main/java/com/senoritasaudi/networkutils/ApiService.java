@@ -3,14 +3,17 @@ package com.senoritasaudi.networkutils;
 import com.senoritasaudi.models.FeedbackResponse;
 import com.senoritasaudi.models.responseModels.ClinicsResponseModel;
 import com.senoritasaudi.models.responseModels.DepartmentResponseModel;
+import com.senoritasaudi.models.responseModels.ExchangeResponseModel;
 import com.senoritasaudi.models.responseModels.FavoriteResponseModel;
 import com.senoritasaudi.models.responseModels.ImageResponse;
 import com.senoritasaudi.models.responseModels.InformationResponseModel;
 import com.senoritasaudi.models.responseModels.NotificationResponseModel;
 import com.senoritasaudi.models.responseModels.OfferResponseModel;
+import com.senoritasaudi.models.responseModels.PointResponseModel;
 import com.senoritasaudi.models.responseModels.QRCodeResponse;
 import com.senoritasaudi.models.responseModels.RequestsModelResponse;
 import com.senoritasaudi.models.responseModels.ReservationResponseModel;
+import com.senoritasaudi.models.responseModels.ReviewResponseModel;
 import com.senoritasaudi.models.responseModels.SliderResponseModel;
 import com.senoritasaudi.models.responseModels.UserResponseModel;
 
@@ -90,6 +93,10 @@ public interface ApiService {
     Call<FeedbackResponse> addReview(@Query("id") String id, @Query("user_id") String user_id , @Query("rate") String rate ,
                                      @Query("review") String review);
 
+    @GET("user_delete_request")
+    Call<FeedbackResponse> deleteRequest(@Query("id") String requestId, @Query("clinic_id") String clinicId , @Query("user_id") String userId ,
+                                     @Query("offer_id") String offerId);
+
     @GET("login")
     Call<UserResponseModel> login(@Query("password") String password,
                                      @Query("token") String token,
@@ -117,7 +124,28 @@ public interface ApiService {
     @GET("change_password")
     Call<FeedbackResponse> changePassword(@Query("mobile") String mobile , @Query("new_password") String password);
 
+    @GET("check_code")
+    Call<FeedbackResponse> checkPromoCode(@Query("code") String code , @Query("offer_id") String offerId,
+                                          @Query("clinic_id") String clinicId,
+                                          @Query("user_id") String userId);
+
+
     @Multipart
     @POST("upload_image_api")
     Call<ImageResponse> uploadImage(@Part MultipartBody.Part image);
+
+    @GET("get_clinics")
+    Call<ClinicsResponseModel> getClinic(@Query("id") String clinicId);
+
+    @GET("get_reviews")
+    Call<ReviewResponseModel> getReview(@Query("id") String clinicId);
+
+    @GET("get_points")
+    Call<PointResponseModel> getPoints();
+
+    @GET("add_points")
+    Call<ExchangeResponseModel> addPoints(@Query("user_id") String id, @Query("id") String pointId,@Query("percent") String percent);
+
+    @GET("update_points")
+    Call<ExchangeResponseModel> updatePoints(@Query("user_id") String id);
 }

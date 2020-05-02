@@ -14,6 +14,7 @@ import com.senoritasaudi.R;
 import com.senoritasaudi.databinding.ActivityContactUsBinding;
 import com.senoritasaudi.events.OnClickListener;
 import com.senoritasaudi.models.FeedbackResponse;
+import com.senoritasaudi.storeutils.StoreManager;
 import com.senoritasaudi.viewmodels.SendFeedbackViewModel;
 import com.senoritasaudi.views.baseviews.BaseActivityWithViewModel;
 import com.senoritasaudi.views.baseviews.BaseActivityWithoutViewModel;
@@ -81,10 +82,18 @@ public class ContactUsActivity extends BaseActivityWithViewModel<SendFeedbackVie
             public void onChanged(FeedbackResponse feedbackResponse) {
                 getActivityBinding().progressParent.setVisibility(View.GONE);
                 if (feedbackResponse != null && feedbackResponse.getStatus()) {
-                    Toast.makeText(ContactUsActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    if (StoreManager.getAppLanguage(ContactUsActivity.this).equals("ar")) {
+                        Toast.makeText(ContactUsActivity.this, feedbackResponse.getMessageAr(), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(ContactUsActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                     finish();
                 } else if (feedbackResponse != null && !feedbackResponse.getStatus()) {
-                    Toast.makeText(ContactUsActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    if (StoreManager.getAppLanguage(ContactUsActivity.this).equals("ar")) {
+                        Toast.makeText(ContactUsActivity.this, feedbackResponse.getMessageAr(), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(ContactUsActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     Toast.makeText(ContactUsActivity.this, getString(R.string.error), Toast.LENGTH_LONG).show();
                 }

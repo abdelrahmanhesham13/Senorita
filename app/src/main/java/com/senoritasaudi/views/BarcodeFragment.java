@@ -20,7 +20,9 @@ import android.widget.Toast;
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 import com.senoritasaudi.R;
 import com.senoritasaudi.databinding.FragmentBarcodeBinding;
+import com.senoritasaudi.models.UserModel;
 import com.senoritasaudi.models.responseModels.QRCodeResponse;
+import com.senoritasaudi.storeutils.StoreManager;
 import com.senoritasaudi.viewmodels.MainViewModel;
 import com.senoritasaudi.views.baseviews.BaseFragmentWithViewModel;
 
@@ -112,7 +114,16 @@ public class BarcodeFragment extends BaseFragmentWithViewModel<MainViewModel, Fr
             @Override
             public void onChanged(QRCodeResponse qrCodeResponse) {
                 if (qrCodeResponse != null) {
-                    Toast.makeText(mContext, qrCodeResponse.getMessageAr(), Toast.LENGTH_SHORT).show();
+                    if (StoreManager.getAppLanguage(mContext).equals("ar")) {
+                        Toast.makeText(mContext, qrCodeResponse.getMessageAr(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(mContext, qrCodeResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    if (qrCodeResponse.getPoints() != null) {
+                        UserModel userModel = getViewModel().getUser();
+                        userModel.setPoints(String.valueOf(qrCodeResponse.getPoints()));
+                        getViewModel().saveUser(userModel);
+                    }
                 }
             }
         });

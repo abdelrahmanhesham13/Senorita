@@ -46,6 +46,9 @@ public class RequestModel {
     @SerializedName("clinic_name")
     @Expose
     private String clinicName;
+    @SerializedName("clinic_name_ar")
+    @Expose
+    private String clinicNameAr;
     @SerializedName("clinic_image")
     @Expose
     private String clinicImage;
@@ -70,6 +73,17 @@ public class RequestModel {
     @SerializedName("price")
     @Expose
     private Object price;
+    @SerializedName("can_delete")
+    @Expose
+    private boolean canDelete;
+
+    public boolean isCanDelete() {
+        return canDelete;
+    }
+
+    public void setCanDelete(boolean canDelete) {
+        this.canDelete = canDelete;
+    }
 
     public String getId() {
         return id;
@@ -81,6 +95,14 @@ public class RequestModel {
 
     public String getUserId() {
         return userId;
+    }
+
+    public String getClinicNameAr() {
+        return clinicNameAr;
+    }
+
+    public void setClinicNameAr(String clinicNameAr) {
+        this.clinicNameAr = clinicNameAr;
     }
 
     public void setUserId(String userId) {

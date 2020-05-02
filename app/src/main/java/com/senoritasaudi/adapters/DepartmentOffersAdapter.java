@@ -27,13 +27,19 @@ public class DepartmentOffersAdapter extends RecyclerView.Adapter<DepartmentOffe
     OnItemClicked mOnItemClicked;
     OnItemClicked onLikeClicked;
     StoreManager storeManager;
+    OnShareClick onShareClick;
 
-    public DepartmentOffersAdapter(Context context , OnItemClicked onItemClicked , OnItemClicked onLikeClicked) {
+    public DepartmentOffersAdapter(Context context , OnItemClicked onItemClicked , OnItemClicked onLikeClicked , OnShareClick onShareClick) {
         this.mContext = context;
         this.mOnItemClicked = onItemClicked;
         this.onLikeClicked = onLikeClicked;
         offerModels = new ArrayList<>();
+        this.onShareClick = onShareClick;
         storeManager = new StoreManager(context);
+    }
+
+    public interface OnShareClick {
+        void onShareClicked();
     }
 
     @NonNull
@@ -65,7 +71,11 @@ public class DepartmentOffersAdapter extends RecyclerView.Adapter<DepartmentOffe
                 .placeholder(R.drawable.im_placeholder)
                 .error(R.drawable.im_placeholder)
                 .into(holder.listDepartmentOfferItemBinding.clinicImage);
-        holder.listDepartmentOfferItemBinding.textView15.setText(offerModels.get(position).getClinicName());
+        if (StoreManager.getAppLanguage(mContext).equals("ar")) {
+            holder.listDepartmentOfferItemBinding.textView15.setText(offerModels.get(position).getClinicNameAr());
+        } else {
+            holder.listDepartmentOfferItemBinding.textView15.setText(offerModels.get(position).getClinicName());
+        }
         holder.listDepartmentOfferItemBinding.textView16.setText(offerModels.get(position).getId());
         holder.listDepartmentOfferItemBinding.textView21.setText(offerModels.get(position).getPlaceName());
         holder.listDepartmentOfferItemBinding.sparkButton.setChecked(offerModels.get(position).getFavourite());
@@ -121,6 +131,7 @@ public class DepartmentOffersAdapter extends RecyclerView.Adapter<DepartmentOffe
                     sendIntent.putExtra(Intent.EXTRA_TEXT, "\"احجزي هذا العرض من خلال ابليكشن سنيوريتا  ("+ offerModels.get(getAdapterPosition()).getId() + " ) http://senoritasaudi.com/landing");
                     sendIntent.setType("text/plain");
                     mContext.startActivity(sendIntent);
+                    onShareClick.onShareClicked();
                 }
             });
         }

@@ -178,11 +178,22 @@
                     app:layout_constraintTop_toBottomOf="@+id/view6"
                     android:layout_marginRight="20dp">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="@string/delete"
+                        android:id="@+id/delete"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:fontFamily="@font/jf_flat"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="center"
+                        android:layout_height="match_parent"/>
+
                     <RatingBar
                         style="@style/Widget.AppCompat.RatingBar.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
                         android:id="@+id/rating"
+                        android:visibility="gone"
                         android:paddingTop="5dp"
                         android:progressTint="#FB8C00"
                         android:src="@drawable/ic_my_reservations"
@@ -192,7 +203,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
+                        android:visibility="gone"
                         android:text="@string/rating"
+                        android:id="@+id/rating_text"
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp"
                         app:fontFamily="@font/jf_flat" />

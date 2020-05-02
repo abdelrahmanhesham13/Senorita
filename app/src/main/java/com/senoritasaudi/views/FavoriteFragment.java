@@ -19,8 +19,11 @@ import com.senoritasaudi.adapters.DepartmentOffersAdapter;
 import com.senoritasaudi.databinding.FragmentFavoriteBinding;
 import com.senoritasaudi.events.OnItemClicked;
 import com.senoritasaudi.models.OfferModel;
+import com.senoritasaudi.models.UserModel;
+import com.senoritasaudi.models.responseModels.ExchangeResponseModel;
 import com.senoritasaudi.models.responseModels.FavoriteResponseModel;
 import com.senoritasaudi.models.responseModels.OfferResponseModel;
+import com.senoritasaudi.storeutils.StoreManager;
 import com.senoritasaudi.viewmodels.OffersViewModel;
 import com.senoritasaudi.viewmodels.factory.ViewModelFactory;
 import com.senoritasaudi.views.baseviews.BaseFragmentWithViewModel;
@@ -60,6 +63,25 @@ public class FavoriteFragment extends BaseFragmentWithViewModel<OffersViewModel 
                             Toast.makeText(mContext, favoriteResponseModel.getMessage(), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(mContext, getString(R.string.error), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        }, new DepartmentOffersAdapter.OnShareClick() {
+            @Override
+            public void onShareClicked() {
+                getViewModel().updatePoints().observe(mActivity, new Observer<ExchangeResponseModel>() {
+                    @Override
+                    public void onChanged(ExchangeResponseModel exchangeResponseModel) {
+                        if (exchangeResponseModel != null) {
+                            if (StoreManager.getAppLanguage(mContext).equals("ar")) {
+                                Toast.makeText(mContext, exchangeResponseModel.getMessageAr(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(mContext, exchangeResponseModel.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                            UserModel userModel = getViewModel().getUser();
+                            userModel.setPoints(String.valueOf(exchangeResponseModel.getPoints()));
+                            getViewModel().saveUser(userModel);
                         }
                     }
                 });

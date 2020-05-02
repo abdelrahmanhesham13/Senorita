@@ -11,9 +11,20 @@ public class QRCodeResponse {
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("points")
+    @Expose
+    private Integer points;
     @SerializedName("message_ar")
     @Expose
     private String messageAr;
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
 
     public Boolean getStatus() {
         return status;

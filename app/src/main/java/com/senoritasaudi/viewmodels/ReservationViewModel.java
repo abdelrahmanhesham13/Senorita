@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.senoritasaudi.models.FeedbackResponse;
 import com.senoritasaudi.models.UserModel;
 import com.senoritasaudi.models.responseModels.OfferResponseModel;
 import com.senoritasaudi.models.responseModels.ReservationResponseModel;
@@ -41,6 +42,10 @@ public class ReservationViewModel extends ViewModel {
 
     public UserModel getUser() {
         return storeManager.getUser();
+    }
+
+    public LiveData<FeedbackResponse> checkPromoCode(String offerId,String clinicId,String code) {
+        return mainRepository.checkPromoCode(offerId,clinicId,getUser().getId(),code);
     }
 
     public boolean containsUser() {

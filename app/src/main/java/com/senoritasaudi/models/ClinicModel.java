@@ -13,6 +13,9 @@ public class ClinicModel {
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("name_ar")
+    @Expose
+    private String nameAr;
     @SerializedName("description")
     @Expose
     private String description;
@@ -43,6 +46,9 @@ public class ClinicModel {
     @SerializedName("mobile")
     @Expose
     private String mobile;
+    @SerializedName("review")
+    @Expose
+    private String review;
 //    @SerializedName("City")
 //    @Expose
 //    private CityModel city;
@@ -55,6 +61,22 @@ public class ClinicModel {
 
     public String getId() {
         return id;
+    }
+
+    public String getNameAr() {
+        return nameAr;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    public void setNameAr(String nameAr) {
+        this.nameAr = nameAr;
     }
 
     public void setId(String id) {

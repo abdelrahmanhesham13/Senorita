@@ -5,6 +5,8 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.senoritasaudi.models.UserModel;
+import com.senoritasaudi.models.responseModels.ExchangeResponseModel;
 import com.senoritasaudi.models.responseModels.FavoriteResponseModel;
 import com.senoritasaudi.models.responseModels.OfferResponseModel;
 import com.senoritasaudi.repositories.MainRepository;
@@ -42,6 +44,18 @@ public class OffersViewModel extends ViewModel {
 
     public LiveData<OfferResponseModel> getFavorites() {
         return mainRepository.getFavorites(storeManager.getUser().getId());
+    }
+
+    public LiveData<ExchangeResponseModel> updatePoints() {
+        return mainRepository.updatePoints(storeManager.getUser().getId());
+    }
+
+    public UserModel getUser() {
+        return storeManager.getUser();
+    }
+
+    public void saveUser(UserModel userModel) {
+        storeManager.saveUser(userModel);
     }
 
     public boolean containsUser() {

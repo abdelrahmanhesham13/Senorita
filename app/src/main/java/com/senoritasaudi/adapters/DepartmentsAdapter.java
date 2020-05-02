@@ -15,6 +15,7 @@ import com.senoritasaudi.databinding.ListDepartmentItemBinding;
 import com.senoritasaudi.databinding.ListDepartmentItemForPageBinding;
 import com.senoritasaudi.events.OnItemClicked;
 import com.senoritasaudi.models.DepartmentModel;
+import com.senoritasaudi.storeutils.StoreManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,11 @@ public class DepartmentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     .placeholder(R.drawable.im_placeholder)
                     .error(R.drawable.im_placeholder)
                     .into(departmentImage.listDepartmentItemBinding.departmentImage);
+            if (StoreManager.getAppLanguage(mContext).equals("ar")) {
+                departmentImage.listDepartmentItemBinding.departmentName.setText(mDepartmentModels.get(position).getNameAr());
+            } else {
+                departmentImage.listDepartmentItemBinding.departmentName.setText(mDepartmentModels.get(position).getName());
+            }
         } else {
             DepartmentForPagerViewHolder departmentForPagerViewHolder = (DepartmentForPagerViewHolder)holder;
             Glide.with(mContext)
@@ -61,8 +67,11 @@ public class DepartmentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     .placeholder(R.drawable.im_placeholder)
                     .error(R.drawable.im_placeholder)
                     .into(departmentForPagerViewHolder.listDepartmentItemForPageBinding.departmentImage);
-            departmentForPagerViewHolder.listDepartmentItemForPageBinding.departmentName.setText(mDepartmentModels.get(position).getName());
-        }
+            if (StoreManager.getAppLanguage(mContext).equals("ar")) {
+                departmentForPagerViewHolder.listDepartmentItemForPageBinding.departmentName.setText(mDepartmentModels.get(position).getNameAr());
+            } else {
+                departmentForPagerViewHolder.listDepartmentItemForPageBinding.departmentName.setText(mDepartmentModels.get(position).getName());
+            }}
     }
 
     public void addAll(List<DepartmentModel> models) {

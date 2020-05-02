@@ -46,6 +46,17 @@ public class UserModel {
     @SerializedName("created")
     @Expose
     private String created;
+    @SerializedName("points")
+    @Expose
+    private String points;
+
+    public String getPoints() {
+        return points;
+    }
+
+    public void setPoints(String points) {
+        this.points = points;
+    }
 
     public String getId() {
         return id;

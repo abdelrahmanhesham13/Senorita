@@ -17,6 +17,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="25dp"
             android:background="@android:color/white"
             tools:context=".views.MenuActivity">
             <ImageView
@@ -28,7 +29,7 @@
                 android:layout_marginTop="10dp"
                 android:src="@drawable/ic_add_clinic"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintTop_toBottomOf="@id/view5"
+                app:layout_constraintTop_toBottomOf="@id/imageView16"
                 app:layout_constraintStart_toStartOf="parent" />
 
 
@@ -124,16 +125,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_vip_member"
-                android:drawableEnd="@drawable/ic_crown"
-                android:drawableRight="@drawable/ic_crown"
                 android:drawablePadding="5dp"
                 android:gravity="center"
-                android:visibility="gone"
+                android:layout_marginStart="15dp"
+                android:visibility="visible"
                 android:paddingStart="5dp"
                 android:paddingTop="2dp"
                 android:paddingEnd="5dp"
                 android:paddingBottom="2dp"
-                android:text="@string/vip_member"
+                android:text="@string/points"
                 android:textColor="@android:color/white"
                 app:fontFamily="@font/jf_flat"
                 app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
@@ -166,6 +166,167 @@
 
 
             <ImageView
+                android:id="@+id/imageView500"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_home"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+            <View
+                android:id="@+id/home"
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{v -> clickHandler.onClick(v)}"
+                android:src="@drawable/ic_notification"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView500" />
+
+            <TextView
+                android:id="@+id/textView555555"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:textAlignment="viewStart"
+                android:gravity="center_vertical|start"
+                android:text="@string/home"
+                android:textColor="@android:color/black"
+                app:fontFamily="@font/jf_flat"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView500"
+                app:layout_constraintEnd_toStartOf="@+id/imageView700"
+                app:layout_constraintHorizontal_bias="0.521"
+                app:layout_constraintStart_toEndOf="@+id/imageView500"
+                app:layout_constraintTop_toTopOf="@+id/imageView500"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/imageView700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView500" />
+
+            <ImageView
+                android:id="@+id/imageView900"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_exchange_points"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView500" />
+
+            <View
+                android:id="@+id/exchange_points"
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{v -> clickHandler.onClick(v)}"
+                android:src="@drawable/ic_notification"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView900" />
+
+            <TextView
+                android:id="@+id/textView5050"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:textAlignment="viewStart"
+                android:gravity="center_vertical|start"
+                android:text="@string/exchange_points"
+                android:textColor="@android:color/black"
+                app:fontFamily="@font/jf_flat"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView900"
+                app:layout_constraintEnd_toStartOf="@+id/imageView7000"
+                app:layout_constraintHorizontal_bias="0.521"
+                app:layout_constraintStart_toEndOf="@+id/imageView900"
+                app:layout_constraintTop_toTopOf="@+id/imageView900"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/imageView7000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView900"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView900" />
+
+
+            <ImageView
+                android:id="@+id/imageView90000"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_search"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView900" />
+
+            <View
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{v -> clickHandler.onClick(v)}"
+                android:src="@drawable/ic_notification"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView90000" />
+
+            <TextView
+                android:id="@+id/textView50500"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:textAlignment="viewStart"
+                android:gravity="center_vertical|start"
+                android:text="@string/search"
+                android:textColor="@android:color/black"
+                app:fontFamily="@font/jf_flat"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView90000"
+                app:layout_constraintEnd_toStartOf="@+id/imageView70000"
+                app:layout_constraintHorizontal_bias="0.521"
+                app:layout_constraintStart_toEndOf="@+id/imageView90000"
+                app:layout_constraintTop_toTopOf="@+id/imageView90000"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/imageView70000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView90000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView90000" />
+
+
+            <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="27dp"
                 android:layout_height="27dp"
@@ -175,7 +336,7 @@
                 android:layout_marginTop="10dp"
                 android:src="@drawable/ic_departments"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view4" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView90000" />
 
 
             <View
@@ -485,19 +646,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageView16" />
 
-            <View
-                android:id="@+id/view5"
-                android:layout_width="match_parent"
-                android:layout_height="0.7dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:background="@color/colorAccent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView16" />
-
             <ImageView
                 android:id="@+id/imageView18"
                 android:layout_width="27dp"
@@ -678,10 +826,10 @@
                 android:onClick="@{v -> clickHandler.onClick(v)}"
                 android:src="@drawable/ic_notification"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toTopOf="@+id/imageView26"
+                app:layout_constraintBottom_toTopOf="@+id/imageView24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView22" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView24" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -710,6 +858,64 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageView24" />
 
+
+            <ImageView
+                android:id="@+id/imageView2400"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_language"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView24" />
+
+
+            <View
+                android:id="@+id/change_language"
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{v -> clickHandler.onClick(v)}"
+                android:src="@drawable/ic_notification"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/imageView2400"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2400" />
+
+            <TextView
+                android:id="@+id/textView1400"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:textAlignment="viewStart"
+                android:gravity="center_vertical|start"
+                android:text="@string/language"
+                android:textColor="@android:color/black"
+                app:fontFamily="@font/jf_flat"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2400"
+                app:layout_constraintEnd_toStartOf="@+id/imageView2500"
+                app:layout_constraintStart_toEndOf="@+id/imageView2400"
+                app:layout_constraintTop_toTopOf="@+id/imageView2400" />
+
+            <ImageView
+                android:id="@+id/imageView2500"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2400"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView2400" />
+
+
+
+
+
             <ImageView
                 android:id="@+id/imageView26"
                 android:layout_width="27dp"
@@ -720,7 +926,7 @@
                 android:src="@drawable/ic_logout"
                 android:tint="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView25" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView2400" />
 
 
             <TextView

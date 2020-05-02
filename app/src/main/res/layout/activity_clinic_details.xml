@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/ef_white"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:orientation="vertical"
+        tools:context=".views.ChangeLanguageActivity">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/clinic_image"
+            android:src="@drawable/im_logo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/jf_flat"
+                android:text="dr Fayza"
+                android:textStyle="bold"
+                android:id="@+id/clinic_name"
+                android:layout_height="wrap_content"/>
+
+            <RatingBar
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rating"
+                android:visibility="visible"
+                android:paddingTop="5dp"
+                android:numStars="5"
+                android:progressTint="#FB8C00"
+                android:src="@drawable/ic_my_reservations"
+                android:tint="@color/colorPrimary" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:drawableStart="@drawable/ic_location"
+            android:gravity="center"
+            android:drawableTint="@color/colorPrimary"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/jf_flat"
+            android:text="dr Fayza"
+            android:id="@+id/location"
+            android:layout_height="wrap_content"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content">
+
+
+            <Button
+                android:id="@+id/show_offers"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/show_offers"
+                android:background="@drawable/bg_show_offers_button"
+                android:textAllCaps="false"
+                android:layout_marginEnd="10dp"
+                android:textColor="#2392A0"
+                android:fontFamily="@font/jf_flat"
+                android:layout_height="40dp"/>
+
+            <Button
+                android:id="@+id/show_location"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:text="@string/show_location"
+                android:background="@drawable/bg_change_language_button_activated"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/jf_flat"
+                android:layout_height="40dp"/>
+
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/reviews"
+            tools:listitem="@layout/list_review_item"
+            android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/progress_parent"
+            android:visibility="visible"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:theme="@style/ProgressStyle" />
+
+        </FrameLayout>
+    </RelativeLayout>
+</layout>

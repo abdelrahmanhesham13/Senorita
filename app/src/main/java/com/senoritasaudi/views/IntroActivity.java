@@ -28,10 +28,10 @@ public class IntroActivity extends BaseActivityWithoutViewModel<ActivityIntroBin
 
     private void setupView() {
         mIntroPagerAdapter = new IntroPagerAdapter(getSupportFragmentManager());
-        mIntroPagerAdapter.addFragment(new IntroFragment("","تصفح واحجز افضل العروض الحصرية",R.drawable.splash_offers));
-        mIntroPagerAdapter.addFragment(new IntroFragment("","يمكنك الان حجز الميعاد المناسب في ثواني",R.drawable.splash_steps));
-        mIntroPagerAdapter.addFragment(new IntroFragment("","امسح الكود لدي مقدم الخدمة لاثبات حضورك واحصل علي نقاط",R.drawable.splash_scan));
-        mIntroPagerAdapter.addFragment(new IntroFragment("","تلقي اشعارات باجدد العروض الحصرية",R.drawable.splash_notification));
+        mIntroPagerAdapter.addFragment(new IntroFragment("",getString(R.string.intro_1),R.drawable.splash_offers));
+        mIntroPagerAdapter.addFragment(new IntroFragment("",getString(R.string.intro_2),R.drawable.splash_steps));
+        mIntroPagerAdapter.addFragment(new IntroFragment("",getString(R.string.intro_3),R.drawable.splash_scan));
+        mIntroPagerAdapter.addFragment(new IntroFragment("",getString(R.string.intro_4),R.drawable.splash_notification));
         getActivityBinding().viewPager.setAdapter(mIntroPagerAdapter);
         getActivityBinding().setClickHandler(this);
     }

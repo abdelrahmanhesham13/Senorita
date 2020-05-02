@@ -42,7 +42,7 @@ public class ChangePasswordActivity extends BaseActivityWithViewModel<LoginViewM
                         @Override
                         public void onChanged(FeedbackResponse feedbackResponse) {
                             if (feedbackResponse != null && feedbackResponse.getStatus()) {
-                                Toast.makeText(ChangePasswordActivity.this, "تم تغيير كلمة المرور بنجاح", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ChangePasswordActivity.this, R.string.password_changed_successfully, Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
                                 Toast.makeText(ChangePasswordActivity.this, getString(R.string.error), Toast.LENGTH_SHORT).show();

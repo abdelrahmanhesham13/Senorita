@@ -16,6 +16,7 @@ import com.senoritasaudi.databinding.ListOfferItemBinding;
 import com.senoritasaudi.databinding.ListReservationItemBinding;
 import com.senoritasaudi.events.OnItemClicked;
 import com.senoritasaudi.models.RequestModel;
+import com.senoritasaudi.storeutils.StoreManager;
 
 import java.util.ArrayList;
 
@@ -23,16 +24,18 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
 
     private ArrayList<RequestModel> requestModels;
     private Context mContext;
-    OnItemClicked mOnItemClicked;
-    String username;
-    OnRateClicked onRateClicked;
+    private OnItemClicked mOnItemClicked;
+    private String username;
+    private OnRateClicked onRateClicked;
+    private OnDeleteClicked onDeleteClicked;
 
-    public ReservationsAdapter(Context context , OnItemClicked onItemClicked , String username , OnRateClicked onRateClicked) {
+    public ReservationsAdapter(Context context , OnItemClicked onItemClicked , String username , OnRateClicked onRateClicked , OnDeleteClicked onDeleteClicked) {
         this.mContext = context;
         this.mOnItemClicked = onItemClicked;
         requestModels = new ArrayList<>();
         this.username = username;
         this.onRateClicked = onRateClicked;
+        this.onDeleteClicked = onDeleteClicked;
     }
 
     @NonNull
@@ -44,15 +47,36 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ReservationViewHolder holder, int position) {
-        holder.listReservationItemBinding.clinicName.setText(requestModels.get(position).getClinicName());
+        if (StoreManager.getAppLanguage(mContext).equals("ar")) {
+            holder.listReservationItemBinding.clinicName.setText(requestModels.get(position).getClinicNameAr());
+        } else {
+            holder.listReservationItemBinding.clinicName.setText(requestModels.get(position).getClinicName());
+        }
         try {
             holder.listReservationItemBinding.rating.setRating(Float.parseFloat(requestModels.get(position).getRate()));
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        if (requestModels.get(position).isCanDelete()) {
+            holder.listReservationItemBinding.delete.setVisibility(View.VISIBLE);
+            holder.listReservationItemBinding.rating.setVisibility(View.GONE);
+            holder.listReservationItemBinding.ratingText.setVisibility(View.GONE);
+        } else {
+            holder.listReservationItemBinding.delete.setVisibility(View.GONE);
+            holder.listReservationItemBinding.rating.setVisibility(View.VISIBLE);
+            holder.listReservationItemBinding.ratingText.setVisibility(View.VISIBLE);
+        }
+
+        if (requestModels.get(position).getStatus().equals("4")) {
+            holder.listReservationItemBinding.imageView34.setVisibility(View.GONE);
+        } else {
+            holder.listReservationItemBinding.imageView34.setVisibility(View.VISIBLE);
+        }
+
         holder.listReservationItemBinding.reservationNumber.setText(String.format("%s : %s", mContext.getString(R.string.reservation_number), requestModels.get(position).getId()));
         holder.listReservationItemBinding.date.setText(requestModels.get(position).getSelectedDate() + "\n" + requestModels.get(position).getSelectedTime());
-        holder.listReservationItemBinding.textView21.setText("رقم العرض : " + requestModels.get(position).getOfferId());
+        holder.listReservationItemBinding.textView21.setText(mContext.getString(R.string.offer_number) + " : " + requestModels.get(position).getOfferId());
         Glide.with(mContext)
                 .load(requestModels.get(position).getClinicImage())
                 .placeholder(R.drawable.im_placeholder)
@@ -105,6 +129,10 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
         void onRateClicked(String reservationId);
     }
 
+    public interface OnDeleteClicked {
+        void onDeleteClicked(RequestModel requestModel);
+    }
+
     class ReservationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ListReservationItemBinding listReservationItemBinding;
@@ -119,6 +147,12 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
                     if (Float.parseFloat(requestModels.get(getAdapterPosition()).getRate()) == 0 && requestModels.get(getAdapterPosition()).getStatus().equals("2")) {
                         onRateClicked.onRateClicked(requestModels.get(getAdapterPosition()).getId());
                     }
+                }
+            });
+            listReservationItemBinding.delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onDeleteClicked.onDeleteClicked(requestModels.get(getAdapterPosition()));
                 }
             });
         }

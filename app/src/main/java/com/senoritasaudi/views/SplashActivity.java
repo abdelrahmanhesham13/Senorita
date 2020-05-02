@@ -23,7 +23,9 @@ public class SplashActivity extends BaseActivityWithViewModel<SplashViewModel,Ac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getActivityViewModel().showIntro()) {
-            NavigationManager.startActivity(this,IntroActivity.class);
+            Intent intent = new Intent(SplashActivity.this,ChangeLanguageActivity.class);
+            intent.putExtra("intro",true);
+            startActivity(intent);
             getActivityViewModel().setShowIntro(false);
             finish();
         } else if (getActivityViewModel().containsUser()) {

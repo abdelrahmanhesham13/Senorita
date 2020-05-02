@@ -31,12 +31,18 @@ public class OfferModel {
     @SerializedName("clinic_name")
     @Expose
     private String clinicName;
+    @SerializedName("clinic_name_ar")
+    @Expose
+    private String clinicNameAr;
     @SerializedName("clinic_image")
     @Expose
     private String clinicImage;
     @SerializedName("category_name")
     @Expose
     private String categoryName;
+    @SerializedName("category_name_ar")
+    @Expose
+    private String categoryNameAr;
     @SerializedName("category_image")
     @Expose
     private String categoryImage;
@@ -49,6 +55,9 @@ public class OfferModel {
     @SerializedName("category")
     @Expose
     private Category category;
+    @SerializedName("request_count")
+    @Expose
+    private int requestCount;
 
     public String getId() {
         return id;
@@ -60,6 +69,14 @@ public class OfferModel {
 
     public String getImage() {
         return image;
+    }
+
+    public int getRequestCount() {
+        return requestCount;
+    }
+
+    public void setRequestCount(int requestCount) {
+        this.requestCount = requestCount;
     }
 
     public void setImage(String image) {
@@ -76,6 +93,22 @@ public class OfferModel {
 
     public String getCategoryId() {
         return categoryId;
+    }
+
+    public String getClinicNameAr() {
+        return clinicNameAr;
+    }
+
+    public void setClinicNameAr(String clinicNameAr) {
+        this.clinicNameAr = clinicNameAr;
+    }
+
+    public String getCategoryNameAr() {
+        return categoryNameAr;
+    }
+
+    public void setCategoryNameAr(String categoryNameAr) {
+        this.categoryNameAr = categoryNameAr;
     }
 
     public void setCategoryId(String categoryId) {

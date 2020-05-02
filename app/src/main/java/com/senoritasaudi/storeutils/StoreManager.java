@@ -30,6 +30,14 @@ public class StoreManager {
         mSharedPreferences.edit().putString("user",gson.toJson(userModel)).apply();
     }
 
+    public static String getAppLanguage(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString("lang","ar");
+    }
+
+    public static void setAppLanguage(Context context,String lang) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("lang",lang).apply();
+    }
+
     public void removeUser() {
         mSharedPreferences.edit().remove("user").apply();
     }

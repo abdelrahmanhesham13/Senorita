@@ -15,6 +15,7 @@ import com.senoritasaudi.databinding.ActivityAddProviderRequestBinding;
 import com.senoritasaudi.databinding.ActivityContactUsBinding;
 import com.senoritasaudi.events.OnClickListener;
 import com.senoritasaudi.models.FeedbackResponse;
+import com.senoritasaudi.storeutils.StoreManager;
 import com.senoritasaudi.viewmodels.SendFeedbackViewModel;
 import com.senoritasaudi.views.baseviews.BaseActivityWithViewModel;
 import com.senoritasaudi.views.baseviews.BaseActivityWithoutViewModel;
@@ -73,10 +74,18 @@ public class AddProviderRequestActivity extends BaseActivityWithViewModel<SendFe
             public void onChanged(FeedbackResponse feedbackResponse) {
                 getActivityBinding().progressParent.setVisibility(View.GONE);
                 if (feedbackResponse != null && feedbackResponse.getStatus()) {
-                    Toast.makeText(AddProviderRequestActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    if (StoreManager.getAppLanguage(AddProviderRequestActivity.this).equals("ar")) {
+                        Toast.makeText(AddProviderRequestActivity.this, feedbackResponse.getMessageAr(), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(AddProviderRequestActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                     finish();
                 } else if (feedbackResponse != null && !feedbackResponse.getStatus()) {
-                    Toast.makeText(AddProviderRequestActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    if (StoreManager.getAppLanguage(AddProviderRequestActivity.this).equals("ar")) {
+                        Toast.makeText(AddProviderRequestActivity.this, feedbackResponse.getMessageAr(), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(AddProviderRequestActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     Toast.makeText(AddProviderRequestActivity.this, getString(R.string.error), Toast.LENGTH_LONG).show();
                 }

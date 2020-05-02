@@ -21,6 +21,7 @@ import com.senoritasaudi.R;
 import com.senoritasaudi.databinding.ActivitySearchBinding;
 import com.senoritasaudi.models.responseModels.ClinicsResponseModel;
 import com.senoritasaudi.models.responseModels.DepartmentResponseModel;
+import com.senoritasaudi.storeutils.StoreManager;
 import com.senoritasaudi.viewmodels.MainViewModel;
 import com.senoritasaudi.views.baseviews.BaseActivityWithViewModel;
 import com.senoritasaudi.views.baseviews.BaseActivityWithoutViewModel;
@@ -37,7 +38,7 @@ public class SearchActivity extends BaseActivityWithViewModel<MainViewModel, Act
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("ابحث عن العروض");
+        setTitle(getString(R.string.search_for_offers));
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -81,9 +82,14 @@ public class SearchActivity extends BaseActivityWithViewModel<MainViewModel, Act
 
     private void setupSpinner2() {
         ArrayList<String> strings = new ArrayList<>();
-        strings.add("اختر القسم");
+        strings.add(getString(R.string.choose_category));
         for (int i = 0; i < clinicsResponseModel.getClinics().size(); i++) {
-            strings.add(clinicsResponseModel.getClinics().get(i).getName());
+            if (StoreManager.getAppLanguage(this).equals("ar")) {
+                strings.add(clinicsResponseModel.getClinics().get(i).getNameAr());
+            } else {
+                strings.add(clinicsResponseModel.getClinics().get(i).getNameAr());
+            }
+
         }
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, strings) {
@@ -126,9 +132,13 @@ public class SearchActivity extends BaseActivityWithViewModel<MainViewModel, Act
 
     private void setupSpinner() {
         ArrayList<String> strings = new ArrayList<>();
-        strings.add("اختر مقدم الخدمه");
+        strings.add(getString(R.string.choose_provider));
         for (int i = 0; i < departmentResponseModel.getCategories().size(); i++) {
-            strings.add(departmentResponseModel.getCategories().get(i).getName());
+            if (StoreManager.getAppLanguage(this).equals("ar")) {
+                strings.add(departmentResponseModel.getCategories().get(i).getNameAr());
+            } else {
+                strings.add(departmentResponseModel.getCategories().get(i).getName());
+            }
         }
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, strings) {

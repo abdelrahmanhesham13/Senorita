@@ -24,6 +24,7 @@ import com.senoritasaudi.events.OnItemClicked;
 import com.senoritasaudi.models.FeedbackResponse;
 import com.senoritasaudi.models.RequestModel;
 import com.senoritasaudi.models.responseModels.RequestsModelResponse;
+import com.senoritasaudi.storeutils.StoreManager;
 import com.senoritasaudi.viewmodels.MainViewModel;
 import com.senoritasaudi.views.baseviews.BaseActivityWithViewModel;
 
@@ -65,6 +66,32 @@ public class MyReservationsActivity extends BaseActivityWithViewModel<MainViewMo
             public void onRateClicked(String reservationId) {
                 show(reservationId);
             }
+        }, new ReservationsAdapter.OnDeleteClicked() {
+            @Override
+            public void onDeleteClicked(RequestModel requestModel) {
+                getActivityBinding().progressBar.setVisibility(View.VISIBLE);
+                getActivityViewModel().deleteRequest(requestModel.getClinicId(), requestModel.getOfferId(), requestModel.getId()).observe(MyReservationsActivity.this, new Observer<FeedbackResponse>() {
+                    @Override
+                    public void onChanged(FeedbackResponse feedbackResponse) {
+                        getActivityViewModel().getRequests().observe(MyReservationsActivity.this, addRequests);
+                        if (feedbackResponse != null && feedbackResponse.getStatus()) {
+                            if (StoreManager.getAppLanguage(MyReservationsActivity.this).equals("ar")) {
+                                Toast.makeText(MyReservationsActivity.this, feedbackResponse.getMessageAr(), Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(MyReservationsActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        } else if (feedbackResponse != null) {
+                            if (StoreManager.getAppLanguage(MyReservationsActivity.this).equals("ar")) {
+                                Toast.makeText(MyReservationsActivity.this, feedbackResponse.getMessageAr(), Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(MyReservationsActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(MyReservationsActivity.this, getString(R.string.error), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }
         });
         getActivityBinding().reservationsRecycler.setAdapter(reservationsAdapter);
         getActivityViewModel().getRequests().observe(this, addRequests);
@@ -104,7 +131,11 @@ public class MyReservationsActivity extends BaseActivityWithViewModel<MainViewMo
                         public void onChanged(FeedbackResponse feedbackResponse) {
                             getActivityViewModel().getRequests().observe(MyReservationsActivity.this, addRequests);
                             if (feedbackResponse != null) {
-                                Toast.makeText(MyReservationsActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                if (StoreManager.getAppLanguage(MyReservationsActivity.this).equals("ar")) {
+                                    Toast.makeText(MyReservationsActivity.this, feedbackResponse.getMessageAr(), Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(MyReservationsActivity.this, feedbackResponse.getMessage(), Toast.LENGTH_LONG).show();
+                                }
                             }
                         }
                     });

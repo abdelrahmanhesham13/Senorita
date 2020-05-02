@@ -17,8 +17,11 @@ import com.senoritasaudi.adapters.DepartmentOffersAdapter;
 import com.senoritasaudi.databinding.ActivityDepartmentOffersBinding;
 import com.senoritasaudi.events.OnItemClicked;
 import com.senoritasaudi.models.OfferModel;
+import com.senoritasaudi.models.UserModel;
+import com.senoritasaudi.models.responseModels.ExchangeResponseModel;
 import com.senoritasaudi.models.responseModels.FavoriteResponseModel;
 import com.senoritasaudi.models.responseModels.OfferResponseModel;
+import com.senoritasaudi.storeutils.StoreManager;
 import com.senoritasaudi.viewmodels.MainViewModel;
 import com.senoritasaudi.viewmodels.OffersViewModel;
 import com.senoritasaudi.viewmodels.factory.ViewModelFactory;
@@ -65,6 +68,25 @@ public class DepartmentOffersActivity extends BaseActivityWithViewModel<OffersVi
                 } else {
                     Toast.makeText(DepartmentOffersActivity.this, getString(R.string.please_login), Toast.LENGTH_SHORT).show();
                 }
+            }
+        }, new DepartmentOffersAdapter.OnShareClick() {
+            @Override
+            public void onShareClicked() {
+                getActivityViewModel().updatePoints().observe(DepartmentOffersActivity.this, new Observer<ExchangeResponseModel>() {
+                    @Override
+                    public void onChanged(ExchangeResponseModel exchangeResponseModel) {
+                        if (exchangeResponseModel != null) {
+                            if (StoreManager.getAppLanguage(DepartmentOffersActivity.this).equals("ar")) {
+                                Toast.makeText(DepartmentOffersActivity.this, exchangeResponseModel.getMessageAr(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(DepartmentOffersActivity.this, exchangeResponseModel.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                            UserModel userModel = getActivityViewModel().getUser();
+                            userModel.setPoints(String.valueOf(exchangeResponseModel.getPoints()));
+                            getActivityViewModel().saveUser(userModel);
+                        }
+                    }
+                });
             }
         });
         getActivityBinding().departmentOffersRecycler.setAdapter(departmentOffersAdapter);

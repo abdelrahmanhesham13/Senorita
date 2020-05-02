@@ -7,14 +7,17 @@ import com.senoritasaudi.models.FeedbackResponse;
 import com.senoritasaudi.models.RequestModel;
 import com.senoritasaudi.models.responseModels.ClinicsResponseModel;
 import com.senoritasaudi.models.responseModels.DepartmentResponseModel;
+import com.senoritasaudi.models.responseModels.ExchangeResponseModel;
 import com.senoritasaudi.models.responseModels.FavoriteResponseModel;
 import com.senoritasaudi.models.responseModels.ImageResponse;
 import com.senoritasaudi.models.responseModels.InformationResponseModel;
 import com.senoritasaudi.models.responseModels.NotificationResponseModel;
 import com.senoritasaudi.models.responseModels.OfferResponseModel;
+import com.senoritasaudi.models.responseModels.PointResponseModel;
 import com.senoritasaudi.models.responseModels.QRCodeResponse;
 import com.senoritasaudi.models.responseModels.RequestsModelResponse;
 import com.senoritasaudi.models.responseModels.ReservationResponseModel;
+import com.senoritasaudi.models.responseModels.ReviewResponseModel;
 import com.senoritasaudi.models.responseModels.SliderResponseModel;
 import com.senoritasaudi.models.responseModels.UserResponseModel;
 import com.senoritasaudi.networkutils.ApiService;
@@ -95,9 +98,51 @@ public class MainRepository {
         return clinicsResponseModelMutableLiveData;
     }
 
+    public LiveData<ClinicsResponseModel> getClinic(String clinicId) {
+        final MutableLiveData<ClinicsResponseModel> clinicsResponseModelMutableLiveData = new MutableLiveData<>();
+        apiService.getClinic(clinicId).enqueue(new Callback<ClinicsResponseModel>() {
+            @Override
+            public void onResponse(@NotNull Call<ClinicsResponseModel> call, @NotNull Response<ClinicsResponseModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    clinicsResponseModelMutableLiveData.setValue(response.body());
+                } else {
+                    clinicsResponseModelMutableLiveData.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ClinicsResponseModel> call, @NotNull Throwable t) {
+                t.printStackTrace();
+                clinicsResponseModelMutableLiveData.setValue(null);
+            }
+        });
+        return clinicsResponseModelMutableLiveData;
+    }
+
     public LiveData<FeedbackResponse> changePassword(String mobile , String password) {
         final MutableLiveData<FeedbackResponse> sliderResponseModelMutableLiveData = new MutableLiveData<>();
         apiService.changePassword(mobile,password).enqueue(new Callback<FeedbackResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<FeedbackResponse> call, @NotNull Response<FeedbackResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    sliderResponseModelMutableLiveData.setValue(response.body());
+                } else {
+                    sliderResponseModelMutableLiveData.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<FeedbackResponse> call, @NotNull Throwable t) {
+                t.printStackTrace();
+                sliderResponseModelMutableLiveData.setValue(null);
+            }
+        });
+        return sliderResponseModelMutableLiveData;
+    }
+
+    public LiveData<FeedbackResponse> checkPromoCode(String offerId , String clinicId,String userId,String code) {
+        final MutableLiveData<FeedbackResponse> sliderResponseModelMutableLiveData = new MutableLiveData<>();
+        apiService.checkPromoCode(code,offerId,clinicId,userId).enqueue(new Callback<FeedbackResponse>() {
             @Override
             public void onResponse(@NotNull Call<FeedbackResponse> call, @NotNull Response<FeedbackResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -411,6 +456,27 @@ public class MainRepository {
         return feedbackResponseMutableLiveData;
     }
 
+    public LiveData<FeedbackResponse> deleteRequest(String clinicId, String userId, String offerId , String requestId) {
+        final MutableLiveData<FeedbackResponse> feedbackResponseMutableLiveData = new MutableLiveData<>();
+        apiService.deleteRequest(requestId, clinicId, userId,offerId).enqueue(new Callback<FeedbackResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<FeedbackResponse> call, @NotNull Response<FeedbackResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    feedbackResponseMutableLiveData.setValue(response.body());
+                } else {
+                    feedbackResponseMutableLiveData.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<FeedbackResponse> call, @NotNull Throwable t) {
+                t.printStackTrace();
+                feedbackResponseMutableLiveData.setValue(null);
+            }
+        });
+        return feedbackResponseMutableLiveData;
+    }
+
     public LiveData<InformationResponseModel> getInformation(String type) {
         final MutableLiveData<InformationResponseModel> informationResponseModelMutableLiveData = new MutableLiveData<>();
         apiService.getInformation(type).enqueue(new Callback<InformationResponseModel>() {
@@ -499,6 +565,30 @@ public class MainRepository {
             }
         });
         return requestsModelResponseMutableLiveData;
+    }
+
+    public LiveData<PointResponseModel> getPoints() {
+        final MutableLiveData<PointResponseModel> pointResponseModelMutableLiveData = new MutableLiveData<>();
+        apiService.getPoints().enqueue(new Callback<PointResponseModel>() {
+            @Override
+            public void onResponse(@NotNull Call<PointResponseModel> call, @NotNull Response<PointResponseModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().getStatus())
+                        pointResponseModelMutableLiveData.setValue(response.body());
+                    else
+                        pointResponseModelMutableLiveData.setValue(null);
+                } else {
+                    pointResponseModelMutableLiveData.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<PointResponseModel> call, @NotNull Throwable t) {
+                t.printStackTrace();
+                pointResponseModelMutableLiveData.setValue(null);
+            }
+        });
+        return pointResponseModelMutableLiveData;
     }
 
     public LiveData<OfferResponseModel> search(HashMap<String,String> hashMap) {
@@ -678,4 +768,75 @@ public class MainRepository {
     }
 
 
+    public LiveData<ReviewResponseModel> getReviews(String clinicId) {
+        final MutableLiveData<ReviewResponseModel> reviewResponseModelMutableLiveData = new MutableLiveData<>();
+        apiService.getReview(clinicId).enqueue(new Callback<ReviewResponseModel>() {
+            @Override
+            public void onResponse(@NotNull Call<ReviewResponseModel> call, @NotNull Response<ReviewResponseModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().getStatus())
+                        reviewResponseModelMutableLiveData.setValue(response.body());
+                    else
+                        reviewResponseModelMutableLiveData.setValue(null);
+                } else {
+                    reviewResponseModelMutableLiveData.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ReviewResponseModel> call, @NotNull Throwable t) {
+                t.printStackTrace();
+                reviewResponseModelMutableLiveData.setValue(null);
+            }
+        });
+        return reviewResponseModelMutableLiveData;
+    }
+
+    public LiveData<ExchangeResponseModel> addPoints(String id, String pointId, String percent) {
+        final MutableLiveData<ExchangeResponseModel> exchangeResponseModelMutableLiveData = new MutableLiveData<>();
+        apiService.addPoints(id,pointId,percent).enqueue(new Callback<ExchangeResponseModel>() {
+            @Override
+            public void onResponse(@NotNull Call<ExchangeResponseModel> call, @NotNull Response<ExchangeResponseModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().getStatus())
+                        exchangeResponseModelMutableLiveData.setValue(response.body());
+                    else
+                        exchangeResponseModelMutableLiveData.setValue(null);
+                } else {
+                    exchangeResponseModelMutableLiveData.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ExchangeResponseModel> call, @NotNull Throwable t) {
+                t.printStackTrace();
+                exchangeResponseModelMutableLiveData.setValue(null);
+            }
+        });
+        return exchangeResponseModelMutableLiveData;
+    }
+
+    public LiveData<ExchangeResponseModel> updatePoints(String id) {
+        final MutableLiveData<ExchangeResponseModel> exchangeResponseModelMutableLiveData = new MutableLiveData<>();
+        apiService.updatePoints(id).enqueue(new Callback<ExchangeResponseModel>() {
+            @Override
+            public void onResponse(@NotNull Call<ExchangeResponseModel> call, @NotNull Response<ExchangeResponseModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().getStatus())
+                        exchangeResponseModelMutableLiveData.setValue(response.body());
+                    else
+                        exchangeResponseModelMutableLiveData.setValue(null);
+                } else {
+                    exchangeResponseModelMutableLiveData.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ExchangeResponseModel> call, @NotNull Throwable t) {
+                t.printStackTrace();
+                exchangeResponseModelMutableLiveData.setValue(null);
+            }
+        });
+        return exchangeResponseModelMutableLiveData;
+    }
 }
