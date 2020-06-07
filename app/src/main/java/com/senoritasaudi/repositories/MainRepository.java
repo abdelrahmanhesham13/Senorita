@@ -414,9 +414,9 @@ public class MainRepository {
         return userResponseModelMutableLiveData;
     }
 
-    public LiveData<FeedbackResponse> sendFeedback(String name, String message, String mobile) {
+    public LiveData<FeedbackResponse> sendFeedback(String name, String message, String mobile , String type) {
         final MutableLiveData<FeedbackResponse> feedbackResponseMutableLiveData = new MutableLiveData<>();
-        apiService.sendFeedBack(name, mobile, message).enqueue(new Callback<FeedbackResponse>() {
+        apiService.sendFeedBack(name, mobile, message,type).enqueue(new Callback<FeedbackResponse>() {
             @Override
             public void onResponse(@NotNull Call<FeedbackResponse> call, @NotNull Response<FeedbackResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {

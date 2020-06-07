@@ -166,7 +166,50 @@
             app:fontFamily="@font/jf_flat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+            app:layout_constraintTop_toBottomOf="@+id/cardView5" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText8">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#757575"
+                    android:text="@string/message_type"
+                    app:fontFamily="@font/jf_flat"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView28" />
+
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/departments_spinner"
+                    android:layout_marginTop="10dp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/next_button"

@@ -61,7 +61,8 @@ public interface ApiService {
     Call<NotificationResponseModel> getNotifications(@Query("user_id") String userId);
 
     @GET("send_feedback")
-    Call<FeedbackResponse> sendFeedBack(@Query("name") String name, @Query("mobile") String mobile, @Query("message") String message);
+    Call<FeedbackResponse> sendFeedBack(@Query("name") String name, @Query("mobile") String mobile, @Query("message") String message,
+                                        @Query("type") String type);
 
     @GET("add_clinic")
     Call<FeedbackResponse> sendRequest(@Query("name") String name, @Query("mobile") String mobile, @Query("message") String message ,

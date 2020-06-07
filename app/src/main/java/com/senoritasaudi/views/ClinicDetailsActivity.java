@@ -68,7 +68,8 @@ public class ClinicDetailsActivity extends BaseActivityWithViewModel<MainViewMod
                         @Override
                         public void onChanged(ReviewResponseModel reviewResponseModel) {
                             getActivityBinding().progressParent.setVisibility(View.GONE);
-                            reviewsAdapter.addReviews((ArrayList<ReviewModel>) reviewResponseModel.getRequests());
+                            if (reviewResponseModel != null && reviewResponseModel.getStatus())
+                                reviewsAdapter.addReviews((ArrayList<ReviewModel>) reviewResponseModel.getRequests());
                         }
                     });
                     getActivityBinding().showLocation.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +86,7 @@ public class ClinicDetailsActivity extends BaseActivityWithViewModel<MainViewMod
                                     putExtra("type", "search").
                                     putExtra("departmentId", "0").
                                     putExtra("clinicId", clinicId).
-                                    putExtra("offerId",""));
+                                    putExtra("offerId", ""));
                         }
                     });
                 } else {

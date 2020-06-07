@@ -133,4 +133,7 @@
     <string name="show_location">اظهر العنوان</string>
     <string name="show_offers">العروض</string>
     <string name="time">مره</string>
+    <string name="message_type">نوع الرسالة</string>
+    <string name="complaints">شكاوي</string>
+    <string name="proposals">مقترحات</string>
 </resources>

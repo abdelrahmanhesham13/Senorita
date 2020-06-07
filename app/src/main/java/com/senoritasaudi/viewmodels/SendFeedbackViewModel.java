@@ -21,8 +21,8 @@ public class SendFeedbackViewModel extends AndroidViewModel {
         storeManager = new StoreManager(application);
     }
 
-    public LiveData<FeedbackResponse> sendFeedBack(String name , String phone , String message) {
-        return mainRepository.sendFeedback(name,phone,message);
+    public LiveData<FeedbackResponse> sendFeedBack(String name , String phone , String message ,String type) {
+        return mainRepository.sendFeedback(name,phone,message ,type);
     }
 
     public LiveData<FeedbackResponse> sendRequest(String name , String phone , String message) {

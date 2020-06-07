@@ -308,7 +308,7 @@
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center_vertical|start"
                 android:hint="@string/promo_code"
-                android:inputType="number"
+                android:inputType="text"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:textAlignment="viewStart"

@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,7 @@ import com.senoritasaudi.views.baseviews.BaseActivityWithoutViewModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
@@ -44,6 +46,7 @@ import java.util.Objects;
 public class ReservationActivity extends BaseActivityWithViewModel<ReservationViewModel,ActivityReservationBinding> implements OnClickListener {
 
     OfferModel offerModel;
+    private static final String TAG = "ReservationActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +98,11 @@ public class ReservationActivity extends BaseActivityWithViewModel<ReservationVi
                         .placeholder(R.drawable.im_placeholder)
                         .error(R.drawable.im_placeholder)
                         .into(getActivityBinding().departmentImage);
+                Glide.with(ReservationActivity.this)
+                        .load(offerModel.getClinicImage())
+                        .placeholder(R.drawable.im_placeholder)
+                        .error(R.drawable.im_placeholder)
+                        .into(getActivityBinding().clinicImage);
             }
         });
     }
@@ -276,7 +284,21 @@ public class ReservationActivity extends BaseActivityWithViewModel<ReservationVi
             }
         }, mYear, mMonth, mDay);
         mDatePicker.setTitle(getString(R.string.select_date));
-        mDatePicker.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+        //mDatePicker.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        long timeInMilliseconds = Calendar.getInstance().getTimeInMillis();
+        try {
+            Date mDate = sdf.parse(offerModel.getValidDate());
+            if (mDate != null) {
+                timeInMilliseconds = mDate.getTime();
+            }
+            Log.d(TAG, "showDateDialog: " + timeInMilliseconds);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        mDatePicker.getDatePicker().setMaxDate(timeInMilliseconds);
         mDatePicker.show();
     }
 }

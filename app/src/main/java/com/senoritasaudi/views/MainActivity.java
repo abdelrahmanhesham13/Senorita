@@ -62,6 +62,8 @@ public class MainActivity extends BaseActivityWithViewModel<MainViewModel, Activ
         super.onNewIntent(intent);
         if (intent.hasExtra("profile")) {
             mBottomNavigationViewEx.setCurrentItem(4);
+        } else if (intent.hasExtra("home")) {
+            mBottomNavigationViewEx.setCurrentItem(0);
         }
     }
 

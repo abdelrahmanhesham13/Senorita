@@ -93,8 +93,13 @@ public class MenuActivity extends BaseActivityWithViewModel<LoginViewModel, Acti
                 NavigationManager.startActivity(MenuActivity.this, NotificationsActivity.class);
                 break;
             case R.id.back_button:
-            case R.id.home:
                 finish();
+                break;
+            case R.id.home:
+                Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent1.putExtra("home",true);
+                startActivity(intent1);
                 break;
             case R.id.exchange_points:
                 if (getActivityViewModel().containsUser()) {

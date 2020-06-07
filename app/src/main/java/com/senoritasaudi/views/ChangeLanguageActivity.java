@@ -47,6 +47,7 @@ public class ChangeLanguageActivity extends BaseActivityWithoutViewModel<Activit
                 } else {
                     NavigationManager.startActivity(ChangeLanguageActivity.this,IntroActivity.class);
                 }
+                finish();
             }
         });
 
@@ -61,6 +62,7 @@ public class ChangeLanguageActivity extends BaseActivityWithoutViewModel<Activit
                 } else {
                     NavigationManager.startActivity(ChangeLanguageActivity.this,IntroActivity.class);
                 }
+                finish();
             }
         });
     }

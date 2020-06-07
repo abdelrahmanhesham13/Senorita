@@ -243,6 +243,9 @@
     <string name="show_location">Show Location</string>
     <string name="show_offers">Show Offers</string>
     <string name="time">times</string>
+    <string name="message_type">Message Type</string>
+    <string name="complaints">Complaints</string>
+    <string name="proposals">Proposals</string>
 
 
 </resources>

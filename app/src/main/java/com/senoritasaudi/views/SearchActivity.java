@@ -87,7 +87,7 @@ public class SearchActivity extends BaseActivityWithViewModel<MainViewModel, Act
             if (StoreManager.getAppLanguage(this).equals("ar")) {
                 strings.add(clinicsResponseModel.getClinics().get(i).getNameAr());
             } else {
-                strings.add(clinicsResponseModel.getClinics().get(i).getNameAr());
+                strings.add(clinicsResponseModel.getClinics().get(i).getName());
             }
 
         }

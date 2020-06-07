@@ -137,6 +137,7 @@ public class HomeFragment extends BaseFragmentWithViewModel<MainViewModel, Fragm
     @Override
     public void setImageForPosition(int position, ImageView imageView) {
         Log.d(TAG, "setImageForPosition: " + position);
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         Glide.with(mContext)
                 .load(sliderResponseModel.getSliders().get(position).getImage())
                 .placeholder(R.drawable.im_placeholder)
