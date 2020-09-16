@@ -8,7 +8,7 @@ public class Constants {
     }
 
     public static class NetworkConstants{
-        public static final String BASE_URL = "https://senoritasaudi.com/api/";
+        public static final String BASE_URL = "https://senoritasaudi.com/admin/api/";
     }
 
 }
