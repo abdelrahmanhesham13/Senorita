@@ -58,7 +58,7 @@ public class ProfileFragment extends BaseFragmentWithViewModel<LoginViewModel, F
                 if (getViewModel().getUser().getImage().contains("https")) {
                     imageUrl = getViewModel().getUser().getImage();
                 } else {
-                    imageUrl = "https://senoritasaudi.com/clinics/user_img/" + getViewModel().getUser().getImage();
+                    imageUrl = "https://senoritasaudi.com/admin/user_img/" + getViewModel().getUser().getImage();
                 }
                 Glide.with(this)
                         .load(imageUrl)

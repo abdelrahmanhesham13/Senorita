@@ -31,7 +31,7 @@ public class MenuActivity extends BaseActivityWithViewModel<LoginViewModel, Acti
                 if (getActivityViewModel().getUser().getImage().contains("https")) {
                     imageUrl = getActivityViewModel().getUser().getImage();
                 } else {
-                    imageUrl = "https://senoritasaudi.com/clinics/user_img/" + getActivityViewModel().getUser().getImage();
+                    imageUrl = "https://senoritasaudi.com/admin/user_img/" + getActivityViewModel().getUser().getImage();
                 }
                 Glide.with(this)
                         .load(imageUrl)
