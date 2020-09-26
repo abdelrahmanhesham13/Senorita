@@ -136,10 +136,20 @@ public class HomeFragment extends BaseFragmentWithViewModel<MainViewModel, Fragm
 
     @Override
     public void setImageForPosition(int position, ImageView imageView) {
-        Log.d(TAG, "setImageForPosition: " + position);
+        SliderModel sliderModel = sliderResponseModel.getSliders().get(position);
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if  (sliderModel.getType().equals("offer") && !sliderModel.getLink().isEmpty()) {
+                    Intent intent = new Intent(mContext,ReservationActivity.class);
+                    intent.putExtra("offerId",sliderModel.getLink());
+                    startActivity(intent);
+                }
+            }
+        });
         Glide.with(mContext)
-                .load(sliderResponseModel.getSliders().get(position).getImage())
+                .load(sliderModel.getImage())
                 .placeholder(R.drawable.im_placeholder)
                 .error(R.drawable.im_placeholder)
                 .into(imageView);

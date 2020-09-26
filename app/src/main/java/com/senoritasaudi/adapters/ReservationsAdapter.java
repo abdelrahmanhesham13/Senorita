@@ -49,8 +49,10 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
     public void onBindViewHolder(@NonNull ReservationViewHolder holder, int position) {
         if (StoreManager.getAppLanguage(mContext).equals("ar")) {
             holder.listReservationItemBinding.clinicName.setText(requestModels.get(position).getClinicNameAr());
+            holder.listReservationItemBinding.price.setText("سعر العرض : " + requestModels.get(position).getOffer().getPrice());
         } else {
             holder.listReservationItemBinding.clinicName.setText(requestModels.get(position).getClinicName());
+            holder.listReservationItemBinding.price.setText("Offer Price : " + requestModels.get(position).getOffer().getPrice());
         }
         try {
             holder.listReservationItemBinding.rating.setRating(Float.parseFloat(requestModels.get(position).getRate()));
@@ -75,6 +77,7 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
         }
 
         holder.listReservationItemBinding.reservationNumber.setText(String.format("%s : %s", mContext.getString(R.string.reservation_number), requestModels.get(position).getId()));
+
         holder.listReservationItemBinding.date.setText(requestModels.get(position).getSelectedDate() + "\n" + requestModels.get(position).getSelectedTime());
         holder.listReservationItemBinding.textView21.setText(mContext.getString(R.string.offer_number) + " : " + requestModels.get(position).getOfferId());
         Glide.with(mContext)
