@@ -136,4 +136,5 @@
     <string name="message_type">نوع الرسالة</string>
     <string name="complaints">شكاوي</string>
     <string name="proposals">مقترحات</string>
+    <string name="privacy_policy_accept">بتسجيل الدخول انت توافع علي <font color="#89182C"><u>سياسة الخصوصيه</u></font></string>
 </resources>

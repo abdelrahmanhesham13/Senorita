@@ -246,6 +246,7 @@
     <string name="message_type">Message Type</string>
     <string name="complaints">Complaints</string>
     <string name="proposals">Proposals</string>
+    <string name="privacy_policy_accept">By login into app you accept <font color="#89182C"><u>privacy policy</u></font></string>
 
 
 </resources>
